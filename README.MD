@@ -1,0 +1,1 @@
+We have gathered together to build a webapp to teach language. We have hopes to learn a lot from this project.
