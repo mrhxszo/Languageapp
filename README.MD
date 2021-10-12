@@ -1,5 +1,33 @@
 # Login and SignUp API for Language app using php
+You first need to create a database and with following command:
+```
+CREATE DATABASE language_app;
+CREATE TABLE Users(
+    userid INT AUTO_INCREMENT PRIMARY KEY,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    useremail VARCHAR(50) NOT NULL,
+    userpassword VARCHAR(200) NOT NULL,
+    lang VARCHAR(10) NOT NULL,
+    difficulty VARCHAR(2) NOT NULL 
+);
+```
+Edit the dbhconnection.php to match your username, password and host
+```
+///make your changes below
+$user = "...";
+$pass = "...";
+$host = "...";
+//make your changes above
+$dbName = "language_app";
 
+$conn = mysqli_connect($host, $user, $pass, $dbName);
+
+if(!$conn){
+    die("connection failed: ". mysqli_connect_error());
+}
+```
 ### SignUp: 
 * endpoint: "http:/.../includes/signup.inc.php"<br/>
 You can use it in a html form and it accepts following format or similar:
