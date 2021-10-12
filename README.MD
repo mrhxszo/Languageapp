@@ -115,3 +115,9 @@ You can use it in a html form and it accepts following format or similar:
   difficulty: ...
   }
   ```
+### Logout:
+endpoint:"includes/logout.inc.php"
+It destroys the session created during logging in and gives following output:
+  ```
+  session: "logged out"
+    ```
