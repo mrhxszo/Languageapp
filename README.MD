@@ -120,4 +120,4 @@ endpoint:"includes/logout.inc.php"
 It destroys the session created during logging in and gives following output:
   ```
   session: "logged out"
-    ```
+  ```
