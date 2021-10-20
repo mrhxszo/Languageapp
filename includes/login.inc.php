@@ -7,7 +7,7 @@ if(isset($_POST["submit"])){
     $password = $_POST["password"];
 
     if(emptyfieldlogin($username, $password) !== False){
-        $error = ["error"=> "emptyfield"];
+        $error = ["417 Expectation Failed"=> "emptyfield"];
         echo json_encode($error);
         exit();
     }

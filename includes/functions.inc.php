@@ -61,7 +61,7 @@ function createuser($conn, $firstname, $lastname, $username, $email, $password, 
     $sql = "INSERT INTO users(firstname,lastname,username,useremail,userpassword, lang, difficulty) VALUES(?,?,?,?,?,?,?);";
     $stmt = mysqli_stmt_init($conn);
     if(!(mysqli_stmt_prepare($stmt, $sql))){
-        $error = ["error"=> "stmtfailed"];
+        $error = ["500 internal server error"=> "stmtfailed"];
         echo json_encode($error);
         exit();
     }
@@ -90,7 +90,7 @@ function loginUser($conn, $username, $password){
     $usernameexists = usernameexists($conn, $username, $username);
 
     if ($usernameexists === false) {
-        $error = ["error"=> "wrongusername"];
+        $error = ["404 not found"=> "username not found"];
         echo json_encode($error);
         exit();
     }
@@ -99,7 +99,7 @@ function loginUser($conn, $username, $password){
     $checkpassword = password_verify($password, $passwordhashed);
 
     if($checkpassword === false){
-        $error = ["error"=> "wrongpassword"];
+        $error = ["401 unauthorized"=> "wrongpassword"];
         echo json_encode($error);
         exit();
     }
@@ -109,7 +109,9 @@ function loginUser($conn, $username, $password){
         $_SESSION["email"] = $usernameexists;
         $_SESSION["userid"] = $usernameexists["userid"];
         $_SESSION["username"] = $usernameexists["username"];
-        echo json_encode(usernameexists($conn, $username, $password));
+        $success = array("200 OK" => "logged in",
+        usernameexists($conn, $username, $password));
+        echo json_encode($success);
         exit();
     }
 

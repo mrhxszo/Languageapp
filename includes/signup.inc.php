@@ -15,40 +15,40 @@ if (isset($_POST["submit"])){
     $level = $_POST["level"];
 
     if(emptyfield($firstname,$lastname,$username,$email,$password,$repassword) !== False){
-        $error = ["error"=> "emptyfields"];
+        $error = ["417 Expectation Failed"=> "emptyfields"];
         echo json_encode($error);
         header('Content-Type: application/json; charset=utf-8');
         exit();
     }
     if(invalidusername($username) != False){
-        $error = ["error"=> "invalidUsername"];
+        $error = ["417 Expectation Failed"=> "invalidUsername"];
         echo json_encode($error);
         exit();
     }
     if(invalidemail($email) != False){
-        $error = ["error"=>"invalidEmail"];
+        $error = ["417 Expectation Failed"=>"invalidEmail"];
         echo json_encode($error);
         exit();
     }
     if(passwordmatch($password, $repassword) != False){
-        $error = ["error"=> "nopasswordmatch"];
+        $error = ["417 Expectation Failed"=> "nopasswordmatch"];
         echo json_encode($error);
         exit();
     }
     if(usernameexists($conn, $username, $email) != False){
-        $error = ["error"=> "usernameexists"];
+        $error = ["417 Expectation Failed"=> "usernameexists"];
         echo json_encode($error);
         exit();      
     }
     if(strlen($password) <= 5 ){
-        $error = ["error"=> "passwordshort"];
+        $error = ["417 Expectation Failed"=> "passwordshort"];
         echo json_encode($error);
         exit(); 
     }
 
     createuser($conn, $firstname, $lastname, $username, $email, $password, $language, $level);
     
-    $error = ["error"=> "none"];
+    $error = ["201"=> "created"];
     echo json_encode($error);
     // if($_GET["error"] == "none"){
     //     $error = ["error"=> $_GET["error"]];
